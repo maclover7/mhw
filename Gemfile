@@ -10,6 +10,9 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
+# MHW Dependencies
+gem 'devise'
+
 # Environment Dependencies
 group :development, :test do
   gem 'byebug'
