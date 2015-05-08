@@ -16,5 +16,6 @@
 !/log/.keep
 /tmp
 
-# Ignore Spring
+# Ignore Spring and Coveralls
+/coverage/*
 /spring
