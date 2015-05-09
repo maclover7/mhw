@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  root to: "pages#sign_up_selection"
   get 'sign_up_selection' => "pages#sign_up_selection"
 
   devise_for :users, skip: :registrations
