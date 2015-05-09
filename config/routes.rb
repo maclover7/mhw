@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+  get 'sign_up_selection' => "pages#sign_up_selection"
+
+  devise_for :users, skip: :registrations
+  devise_for :students, :teachers, controllers: { registrations: "registrations" }, skip: :sessions
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
