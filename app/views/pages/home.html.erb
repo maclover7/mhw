@@ -3,6 +3,6 @@
 	<% if user_signed_in? %>
 	  Welcome, <%= @user.name %>!
 	<% else %>
-	  Click here to <%= link_to "Sign Up", sign_up_selection_path, class: "btn btn-primary" %>
+	  Click here to <%= link_to "Sign Up", auth_path, class: "btn btn-primary" %>
 	<% end %>
 </div>
