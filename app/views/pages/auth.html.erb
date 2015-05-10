@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h1 class="panel-title" id="panel-title">Sign in:</h1>
+      </div>
+      <div class="panel-body">
+        <p> <%= link_to "Student / Teacher", new_user_session_path %> </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title" id="panel-title">Sign up:</h3>
+      </div>
+      <div class="panel-body">
+        <p> <%= link_to "Student", new_student_registration_path %> </p>
+        <p> <%= link_to "Teacher", new_teacher_registration_path %> </p>
+      </div>
+    </div>
+  </div>
+</div>
