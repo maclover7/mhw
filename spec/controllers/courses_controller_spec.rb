@@ -88,17 +88,17 @@ RSpec.describe CoursesController, type: :controller do
       end
     end
 
-#    context "with invalid params" do
-#      it "assigns a newly created but unsaved course as @course" do
-#        post :create, {:course => invalid_attributes}, valid_session
-#        expect(assigns(:course)).to be_a_new(Course)
-#      end
-#
-#      it "re-renders the 'new' template" do
-#        post :create, {:course => invalid_attributes}, valid_session
-#        expect(response).to render_template("new")
-#      end
-#    end
+    context "with invalid params" do
+      it "assigns a newly created but unsaved course as @course" do
+        post :create, course: FactoryGirl.attributes_for(:course, name: "")
+        assigns(:course).should be_a_new(Course)
+      end
+
+      it "re-renders the 'new' template" do
+        post :create, course: FactoryGirl.attributes_for(:course, name: "")
+        response.should render_template("new")
+      end
+    end
   end
 
   describe "PUT #update" do
@@ -123,26 +123,25 @@ RSpec.describe CoursesController, type: :controller do
       end
     end
 
-#    context "with invalid params" do
-#      it "assigns the course as @course" do
-#        course = FactoryGirl.create(:course)
-#        put :update, id: course, course: FactoryGirl.attributes_for(:course, name: "english")
-#        expect(assigns(:course)).to eq(course)
-#      end
-#
-#      it "re-renders the 'edit' template" do
-#        course = FactoryGirl.create(:course)
-#        put :update, id: course, course: FactoryGirl.attributes_for(:course, name: "english")
-#        expect(response).to render_template("edit")
-#      end
-#    end
+    context "with invalid params" do
+      before { @course = FactoryGirl.create(:course) }
+      it "assigns the course as @course" do
+        put :update, id: @course, course: FactoryGirl.attributes_for(:course, name: "")
+        assigns(:course).should eq(@course)
+      end
+
+      it "re-renders the 'edit' template" do
+        put :update, id: @course, course: FactoryGirl.attributes_for(:course, name: "")
+        response.should render_template("edit")
+      end
+    end
   end
 
   describe "DELETE #destroy" do
     let(:teacher) { FactoryGirl.create(:teacher) }
     before { sign_in teacher }
     before { @course = FactoryGirl.create(:course) }
-    
+
     it "destroys the requested course" do
       expect {
         delete :destroy, id: @course
