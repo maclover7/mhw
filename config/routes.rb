@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root to: "pages#home"
   get 'auth' => "pages#auth"
 
+  resources :courses
+
   devise_for :users, skip: :registrations
   devise_for :students, :teachers, controllers: { registrations: "registrations" }, skip: :sessions
   # The priority is based upon order of creation: first created -> highest priority.

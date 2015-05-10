@@ -1,4 +1,10 @@
 FactoryGirl.define do
+  factory :course do
+    name { Faker::Name.first_name }
+    description { Faker::Lorem.paragraph }
+    course_code { Faker::Lorem.word }
+  end
+
   factory :student, traits: [:user]
   factory :teacher, traits: [:user]
   factory :user, traits: [:user]
