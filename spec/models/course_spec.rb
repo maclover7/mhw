@@ -6,4 +6,6 @@ RSpec.describe Course, type: :model do
     FactoryGirl.build(:course).should be_valid
   end
 
+  it { should belong_to(:teacher) }
+
 end

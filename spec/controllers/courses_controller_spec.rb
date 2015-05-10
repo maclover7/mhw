@@ -3,6 +3,9 @@ require 'rails_helper'
 RSpec.describe CoursesController, type: :controller do
 
   describe "GET #index" do
+    let(:teacher) { FactoryGirl.create(:teacher) }
+    before { sign_in teacher }
+
     it "renders the index template" do
       course = FactoryGirl.create(:course)
       get :index
@@ -12,6 +15,9 @@ RSpec.describe CoursesController, type: :controller do
   end
 
   describe "GET #show" do
+    let(:teacher) { FactoryGirl.create(:teacher) }
+    before { sign_in teacher }
+
     before { @course = FactoryGirl.create(:course) }
     it "assigns the requested course as @course" do
       get :show, id: @course
@@ -26,6 +32,9 @@ RSpec.describe CoursesController, type: :controller do
   end
 
   describe "GET #new" do
+    let(:teacher) { FactoryGirl.create(:teacher) }
+    before { sign_in teacher }
+
     it "assigns a new course as @course" do
       get :new
       assigns(:course).should be_a_new(Course)
@@ -39,7 +48,10 @@ RSpec.describe CoursesController, type: :controller do
   end
 
   describe "GET #edit" do
+    let(:teacher) { FactoryGirl.create(:teacher) }
+    before { sign_in teacher }
     before { @course = FactoryGirl.create(:course) }
+
     it "assigns the requested course as @course" do
       get :edit, id: @course
       assigns(:course).should eq(@course)
@@ -53,6 +65,9 @@ RSpec.describe CoursesController, type: :controller do
   end
 
   describe "POST #create" do
+    let(:teacher) { FactoryGirl.create(:teacher) }
+    before { sign_in teacher }
+
     context "with valid params" do
       it "creates a new Course" do
         expect {
@@ -87,6 +102,9 @@ RSpec.describe CoursesController, type: :controller do
   end
 
   describe "PUT #update" do
+    let(:teacher) { FactoryGirl.create(:teacher) }
+    before { sign_in teacher }
+
     context "with valid params" do
       before { @course = FactoryGirl.create(:course) }
       it "updates the requested course" do
@@ -121,7 +139,10 @@ RSpec.describe CoursesController, type: :controller do
   end
 
   describe "DELETE #destroy" do
+    let(:teacher) { FactoryGirl.create(:teacher) }
+    before { sign_in teacher }
     before { @course = FactoryGirl.create(:course) }
+    
     it "destroys the requested course" do
       expect {
         delete :destroy, id: @course
