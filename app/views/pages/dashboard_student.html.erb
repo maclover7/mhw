@@ -14,8 +14,10 @@
     <div class="well">
       <h4>My Courses:</h4>
       <hr>
-      <p> <%= link_to "placeholder!!", root_path %> </p>
-      <p><a class="btn btn-primary" href="#">Add</a></p>
+      <% @courses.each do |course| %>
+      <p> <%= link_to "#{course.name}", course %> </p>
+      <% end %>
+      <%= render "pages/add_course" %>
     </div>
   </div>
 
@@ -31,7 +33,7 @@
     <!-- to be hidden and viewed when a time period is selected -->
 
     <h3>This week</h3><p>Monday, June 4th, 2015 to Friday, June 8th, 2015</p>
-    <p><a class="btn btn-primary" href="#"><span class="glyphicon glyphicon-plus"></span>Add Assignment</a></p>
+    <p><a class="btn btn-primary" href="#"><span class="glyphicon glyphicon-plus"></span> Add Assignment</a></p>
 
     <div class="well">
       <h2 class="center">No work to do here!</h2>
