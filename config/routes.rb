@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  %w(Student Teacher).each do |t|
+    authenticated :user, lambda { |u| u.type == t } do
+      root to: "pages#dashboard_#{ t.underscore }", as: "#{ t.downcase }_root".to_sym
+    end
+  end
+
   root to: "pages#home"
   get 'auth' => "pages#auth"
 
