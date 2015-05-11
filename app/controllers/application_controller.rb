@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
   def configure_devise_params
     [:sign_up, :account_update].each do |s|
       devise_parameter_sanitizer.for(s) do |u|
@@ -19,7 +23,7 @@ class ApplicationController < ActionController::Base
     end
 
     define_method "authenticate_#{ k.underscore }!" do
-      |opts={}| send("current_#{ k.underscore }") || not_authorized
+      |opts={}| send("current_#{ k.underscore }") || not_found
     end
 
     define_method "#{ k.underscore }_signed_in?" do
