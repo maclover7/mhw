@@ -15,6 +15,7 @@ gem 'jbuilder', '~> 2.0'
 # MHW Dependencies
 gem 'devise'
 gem 'bootstrap-sass'
+gem 'puma'
 
 # Environment Dependencies
 group :development, :test do
