@@ -4,7 +4,6 @@ ruby '2.2.2'
 
 # Rails Dependencies
 gem 'rails', '4.2.1'
-gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -25,6 +24,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'coveralls', require: false
+  gem 'sqlite3'
 end
 
 group :test do
