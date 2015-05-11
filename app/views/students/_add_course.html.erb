@@ -13,6 +13,15 @@
       </div>
 
       <div class="modal-body">
+        <%= form_for :course, url: add_course_student_path(@student), html: { multipart: true, method: :post } do |f| %>
+          <div class="form-group">
+            <%= f.label :course_code %>
+            <%= f.text_field :course_code, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.submit "Add Course", class: "btn btn-primary" %>
+          </div>
+        <% end %>
       </div>
 
     </div>

@@ -15,7 +15,12 @@
       <h4>My Courses:</h4>
       <hr>
       <% @courses.each do |course| %>
-      <p> <%= link_to "#{course.name}", course %> </p>
+      <p>
+        <%= link_to "#{course.name}", course %>
+        <%= link_to leave_course_student_path(@student, course), method: :delete, data: { confirm: 'Are you sure you want to leave this course?' } do %>
+          <span class="glyphicon glyphicon-trash"></span>
+        <% end %>
+      </p>
       <% end %>
       <%= render "students/add_course" %>
     </div>

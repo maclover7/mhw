@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   %w(Student Teacher).each do |t|
     authenticated :user, lambda { |u| u.type == t } do
-      root to: "#{ t.pluralize.underscore }#index", as: "#{ t }_root".to_sym
+      root to: "#{ t.pluralize.underscore }#index", as: "#{ t.downcase }_root".to_sym
     end
   end
 
@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   get 'auth' => "pages#auth"
 
   resources :courses
+
+  post "/students/:id/add_course" => "students#add_course", as: :add_course_student
+  delete "/students/:id/leave_course/:course_id" => "students#leave_course", as: :leave_course_student
 
   devise_for :users, skip: :registrations
   devise_for :students, :teachers, controllers: { registrations: "registrations" }, skip: :sessions
