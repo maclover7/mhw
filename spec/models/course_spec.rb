@@ -4,6 +4,7 @@ RSpec.describe Course, type: :model do
   let(:course) { FactoryGirl.create(:course) }
 
   it { should belong_to(:teacher) }
+  it { should have_many(:enrollments) }
 
   it "has a valid factory" do
     FactoryGirl.build(:course).should be_valid

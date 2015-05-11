@@ -5,6 +5,11 @@ FactoryGirl.define do
     course_code { Faker::Lorem.word }
   end
 
+  factory :enrollment do
+    course_id { Faker::Number.digit }
+    student_id { Faker::Number.digit }
+  end
+
   factory :student, traits: [:user]
   factory :teacher, traits: [:user]
   factory :user, traits: [:user]

@@ -6,5 +6,7 @@ describe Student, type: :model do
     FactoryGirl.build(:student).should be_valid
   end
 
+  it { should have_many(:enrollments) }
+
   it_should_behave_like "a user"
 end
