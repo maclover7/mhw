@@ -1,8 +1,4 @@
 <div class="jumbotron">
 	<h1>Welcome to MHW.</h1>
-	<% if user_signed_in? %>
-	  Welcome, <%= @user.name %>!
-	<% else %>
-	  Click here to <%= link_to "Sign Up", auth_path, class: "btn btn-primary" %>
-	<% end %>
+	Click here to <%= link_to "Sign Up", auth_path, class: "btn btn-primary" %>
 </div>
