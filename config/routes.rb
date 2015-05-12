@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :assignments
   %w(Student Teacher).each do |t|
     authenticated :user, lambda { |u| u.type == t } do
       root to: "#{ t.pluralize.underscore }#index", as: "#{ t.downcase }_root".to_sym

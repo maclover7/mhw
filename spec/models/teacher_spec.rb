@@ -6,6 +6,7 @@ describe Teacher, type: :model do
     FactoryGirl.build(:teacher).should be_valid
   end
 
+  it { should have_many(:assignments) }
   it { should have_many(:courses) }
 
   it_should_behave_like "a user"
