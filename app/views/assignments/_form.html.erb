@@ -1,33 +1,29 @@
-<%= form_for(@assignment) do |f| %>
+<%= form_for @assignment, html: { multipart: true } do |f| %>
   <% if @assignment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@assignment.errors.count, "error") %> prohibited this assignment from being saved:</h2>
 
       <ul>
-      <% @assignment.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <% @assignment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
+  <div class="form-group">
+    <%= f.label :body %>
+    <%= f.text_area :body, class: "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :course_id %><br>
-    <%= f.number_field :course_id %>
+    <%= f.collection_select :course_id, Course.where(teacher_id: current_teacher).all, :id, :name %>
   </div>
-  <div class="field">
-    <%= f.label :teacher_id %><br>
-    <%= f.number_field :teacher_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>

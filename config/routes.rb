@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :assignments
   %w(Student Teacher).each do |t|
     authenticated :user, lambda { |u| u.type == t } do
       root to: "#{ t.pluralize.underscore }#index", as: "#{ t.downcase }_root".to_sym
@@ -11,6 +10,7 @@ Rails.application.routes.draw do
   get 'auth' => "pages#auth"
 
   resources :courses
+  resources :assignments
 
   post "/students/:id/add_course" => "students#add_course", as: :add_course_student
   delete "/students/:id/leave_course/:course_id" => "students#leave_course", as: :leave_course_student

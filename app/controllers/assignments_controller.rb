@@ -1,5 +1,6 @@
 class AssignmentsController < ApplicationController
   before_action :set_assignment, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_teacher!
 
   # GET /assignments
   # GET /assignments.json
@@ -14,7 +15,7 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/new
   def new
-    @assignment = Assignment.new
+    @assignment = current_teacher.assignments.build #Assignment.new
   end
 
   # GET /assignments/1/edit
@@ -24,7 +25,7 @@ class AssignmentsController < ApplicationController
   # POST /assignments
   # POST /assignments.json
   def create
-    @assignment = Assignment.new(assignment_params)
+    @assignment = current_teacher.assignments.build #Assignment.new(assignment_params)
 
     respond_to do |format|
       if @assignment.save
