@@ -25,7 +25,7 @@ class AssignmentsController < ApplicationController
   # POST /assignments
   # POST /assignments.json
   def create
-    @assignment = current_teacher.assignments.build #Assignment.new(assignment_params)
+    @assignment = current_teacher.assignments.build(assignment_params) #Assignment.new(assignment_params)
 
     respond_to do |format|
       if @assignment.save

@@ -19,6 +19,9 @@ RSpec.describe AssignmentsController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
+    let(:teacher) { FactoryGirl.create(:teacher) }
+    before { sign_in teacher }
+
     it "assigns all assignments as @assignments" do
       assignment = FactoryGirl.create(:assignment)
       get :index
@@ -27,6 +30,9 @@ RSpec.describe AssignmentsController, type: :controller do
   end
 
   describe "GET #show" do
+    let(:teacher) { FactoryGirl.create(:teacher) }
+    before { sign_in teacher }
+
     it "assigns the requested assignment as @assignment" do
       assignment = FactoryGirl.create(:assignment)
       get :show, id: assignment
@@ -35,6 +41,9 @@ RSpec.describe AssignmentsController, type: :controller do
   end
 
   describe "GET #new" do
+    let(:teacher) { FactoryGirl.create(:teacher) }
+    before { sign_in teacher }
+
     it "assigns a new assignment as @assignment" do
       get :new
       assigns(:assignment).should be_a_new(Assignment)
@@ -42,6 +51,9 @@ RSpec.describe AssignmentsController, type: :controller do
   end
 
   describe "GET #edit" do
+    let(:teacher) { FactoryGirl.create(:teacher) }
+    before { sign_in teacher }
+
     it "assigns the requested assignment as @assignment" do
       assignment = FactoryGirl.create(:assignment)
       get :edit, id: assignment
@@ -50,6 +62,9 @@ RSpec.describe AssignmentsController, type: :controller do
   end
 
   describe "POST #create" do
+    let(:teacher) { FactoryGirl.create(:teacher) }
+    before { sign_in teacher }
+
     context "with valid params" do
       it "creates a new Assignment" do
         expect {
@@ -83,6 +98,9 @@ RSpec.describe AssignmentsController, type: :controller do
   end
 
   describe "PUT #update" do
+    let(:teacher) { FactoryGirl.create(:teacher) }
+    before { sign_in teacher }
+
     context "with valid params" do
 
       it "updates the requested assignment" do
@@ -120,6 +138,9 @@ RSpec.describe AssignmentsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
+    let(:teacher) { FactoryGirl.create(:teacher) }
+    before { sign_in teacher }
+    
     it "destroys the requested assignment" do
       assignment = FactoryGirl.create(:assignment)
       expect {
