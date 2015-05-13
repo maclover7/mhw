@@ -8,6 +8,11 @@ FactoryGirl.define do
     teacher_id { Faker::Number.digit }
   end
 
+  factory :student_assignment do
+    assignment_id { Faker::Number.digit }
+    student_id { Faker::Number.digit }
+  end
+
   factory :course do
     name { Faker::Name.first_name }
     description { Faker::Lorem.paragraph }

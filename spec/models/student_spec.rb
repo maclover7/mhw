@@ -7,6 +7,7 @@ describe Student, type: :model do
   end
 
   it { should have_many(:enrollments) }
+  it { should have_many(:student_assignments) }
 
   it_should_behave_like "a user"
 end
