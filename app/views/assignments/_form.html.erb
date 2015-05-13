@@ -20,6 +20,10 @@
     <%= f.text_area :body, class: "form-control" %>
   </div>
   <div class="form-group">
+    <%= f.label :due_date, "Due Date (all times are in EST)" %><br>
+    <%= f.datetime_select :due_date %>
+  </div>
+  <div class="form-group">
     <%= f.label :course_id %><br>
     <%= f.collection_select :course_id, Course.where(teacher_id: current_teacher).all, :id, :name %>
   </div>

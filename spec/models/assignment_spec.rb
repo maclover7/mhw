@@ -20,4 +20,9 @@ RSpec.describe Assignment, type: :model do
     before { assignment.body = "" }
     it { is_expected.not_to be_valid }
   end
+
+  context "with no due_date" do
+    before { assignment.due_date = nil }
+    it { is_expected.not_to be_valid }
+  end
 end

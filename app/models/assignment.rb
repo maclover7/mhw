@@ -2,5 +2,5 @@ class Assignment < ActiveRecord::Base
   belongs_to :course
   belongs_to :teacher
 
-  validates_presence_of :name, :body
+  validates_presence_of :name, :body, :due_date
 end

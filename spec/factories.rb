@@ -3,10 +3,11 @@ FactoryGirl.define do
   factory :assignment do
     name { Faker::Name.first_name }
     body { Faker::Lorem.paragraph }
+    due_date { Faker::Time.forward(23, :morning) }
     course_id { Faker::Number.digit }
     teacher_id { Faker::Number.digit }
   end
-  
+
   factory :course do
     name { Faker::Name.first_name }
     description { Faker::Lorem.paragraph }
