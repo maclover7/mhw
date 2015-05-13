@@ -60,14 +60,16 @@
       </thead>
 
       <tbody>
-        <tr>
-          <td>check</td>
-          <td>Read chapter 5</td>
-          <td>English</td>
-          <td>Tuesday</td>
-          <td>Re-read chapter 5 of The Assistant</td>
-          <td><span class="glyphicon glyphicon-pencil"></span></td>
-        </tr>
+        <% @assignments.each do |a| %>
+          <tr>
+            <td>check</td>
+            <td> <%= a.name %> </td>
+            <td> <%= a.course.name %> </td>
+            <td>Tuesday</td>
+            <td> <%= a.body %> </td>
+            <td><span class="glyphicon glyphicon-pencil"></span></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
     </div>
