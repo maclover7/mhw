@@ -15,6 +15,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'devise'
 gem 'bootstrap-sass'
 gem 'puma'
+gem 'delayed_job_active_record'
 
 # Environment Dependencies
 group :development, :test do
