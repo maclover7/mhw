@@ -26,4 +26,7 @@ RSpec.describe Assignment, type: :model do
     before { assignment.due_date = nil }
     it { is_expected.not_to be_valid }
   end
+
+  it "creates student_assignments" do
+  end
 end
