@@ -14,6 +14,12 @@ FactoryGirl.define do
     course_code { Faker::Lorem.word }
   end
 
+  factory :course_link do
+    course_id { Faker::Number.digit }
+    name { Faker::Name.first_name }
+    url { Faker::Internet.url }
+  end
+
   factory :enrollment do
     course_id { Faker::Number.digit }
     student_id { Faker::Number.digit }

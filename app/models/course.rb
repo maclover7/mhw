@@ -2,6 +2,7 @@ class Course < ActiveRecord::Base
   before_validation :generate_course_code
 
   has_many :assignments
+  has_many :course_links
   has_many :enrollments, dependent: :destroy
   has_many :students, through: :enrollments
   belongs_to :teacher
