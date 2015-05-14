@@ -9,7 +9,7 @@ Fork the [project on Github](https://github.com/maclover7/mhw) and check out you
 
 ```
 git clone https://github.com/contributor/mhw.git
-cd hackcentral
+cd mhw
 git remote add upstream https://github.com/maclover7/mhw.git
 ```
 
