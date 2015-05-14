@@ -15,22 +15,22 @@
   </thead>
 
   <tbody>
-    <% @courses.each do |course| %>
+    <% @courses.each do |c| %>
       <tr>
-        <td><%= course.name %></td>
-        <td><%= course.description %></td>
-        <td><%= course.course_code %></td>
+        <td><%= c.name %></td>
+        <td><%= c.description %></td>
+        <td><%= c.course_code %></td>
         <td>
           <ul>
-            <li> <%= link_to 'Show', course %> </li>
-            <li> <%= link_to 'Edit', edit_course_path(course) %> </li>
-            <li> <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %> </li>
+            <li> <%= link_to 'Show', c %> </li>
+            <li> <%= link_to 'Edit', edit_course_path(c) %> </li>
+            <li> <%= link_to 'Destroy', c, method: :delete, data: { confirm: 'Are you sure?' } %> </li>
           </ul>
         </td>
         <td>
           <ul>
             <li>Create an assignment</li>
-            <li>Create a link</li>
+            <%= render "teachers/add_link", course: c %>
             <li>Send an email</li>
             <li>Upload a file</li>
           </ul>

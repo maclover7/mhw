@@ -2,6 +2,8 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_teacher!
 
+  helper ApplicationHelper
+
   # GET /courses
   # GET /courses.json
   def index
@@ -12,6 +14,7 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
     @assignments = @course.assignments
+    @course_links = @course.course_links
   end
 
   # GET /courses/new
@@ -56,6 +59,28 @@ class CoursesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
     end
+  end
+
+  def add_link
+    @course = Course.find(params[:id])
+    name = params[:course_link][:name]
+    url = params[:course_link][:url]
+    @course_link = CourseLink.new(name: name, url: url, course_id: @course.id)
+    if @course_link.save
+      flash[:alert] = "Link saved!"
+      redirect_to teacher_root_path
+    else
+      flash[:alert] = "The link did not save properly."
+    end
+  end
+
+  def delete_link
+    @course = Course.find(params[:id])
+    @course_link = CourseLink.find(params[:link_id])
+
+    @course_link.destroy
+    flash[:alert] = "Link deleted!"
+    redirect_to course_path(@course)
   end
 
   private

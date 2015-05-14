@@ -81,13 +81,6 @@ RSpec.describe StudentsController, type: :controller do
         response.should redirect_to(student_root_path)
       end
     end
-
-    #context "with non-valid course" do
-    #  it "flashes an error message" do
-    #    delete :leave_course, id: student, course_id: {}
-    #    expect(flash[:alert]).to match /error occured/m
-    #  end
-    #end
   end
 
 end

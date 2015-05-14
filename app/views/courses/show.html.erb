@@ -45,6 +45,29 @@
 <div class="row">
   <div class="col-md-6">
     <p><strong>Links:</strong></p>
+
+    <% if @course_links.any? %>
+      <ul>
+        <% @course_links.each do |l| %>
+          <% if /^http/i.match(l.url) or /^https/i.match(l.url) %>
+            <li>
+              <%= link_to l.name, l.url %>
+              <%= link_to delete_link_course_path(@course, l), method: :delete, data: { confirm: 'Are you sure you want to delete this link?' } do %>
+                <span class="glyphicon glyphicon-trash"></span>
+              <% end %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to l.name, "http://#{l.url}" %>
+              <%= link_to delete_link_course_path(@course, l), method: :delete, data: { confirm: 'Are you sure you want to delete this link?' } do %>
+                <span class="glyphicon glyphicon-trash"></span>
+              <% end %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    <% end %>
+
   </div>
   <div class="col-md-6">
     <p><strong>Files:</strong></p>

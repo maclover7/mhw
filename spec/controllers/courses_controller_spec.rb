@@ -154,4 +154,43 @@ RSpec.describe CoursesController, type: :controller do
     end
   end
 
+  describe "POST #add_link" do
+    let(:teacher) { FactoryGirl.create(:teacher) }
+    before { sign_in teacher }
+    let(:course) { FactoryGirl.create(:course) }
+
+    context "with valid course_link" do
+      it "creates a course_link" do
+        expect {
+          post :add_link, id: course, course_link: FactoryGirl.attributes_for(:course_link)
+        }.to change(CourseLink, :count).by(1)
+      end
+
+      it "redirects to teacher_root path" do
+        post :add_link, id: course, course_link: FactoryGirl.attributes_for(:course_link)
+        response.should redirect_to(teacher_root_path)
+      end
+    end
+  end
+
+  describe "DELETE #delete_link" do
+    let(:teacher) { FactoryGirl.create(:teacher) }
+    before { sign_in teacher }
+    let(:course) { FactoryGirl.create(:course) }
+    before(:each) { @course_link = FactoryGirl.create(:course_link) }
+
+    context "with valid course_link" do
+      it "removes the course_link" do
+        expect {
+          delete :delete_link, id: course, link_id: @course_link
+        }.to change(CourseLink, :count).by(-1)
+      end
+
+      it "redirects to the course's path" do
+        delete :delete_link, id: course, link_id: @course_link
+        response.should redirect_to(course_path(course))
+      end
+    end
+  end
+
 end
