@@ -31,7 +31,6 @@ Ensure that you can build the project and run tests.
 bundle install
 bundle exec rake
 ```
-<%= new_user_session_path %>
 
 #### Write Tests
 
