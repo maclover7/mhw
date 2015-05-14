@@ -1,6 +1,7 @@
 class AssignmentsController < ApplicationController
   before_action :set_assignment, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_teacher!
+  before_action :correct_teacher, only: [:edit, :update, :destroy]
 
   # GET /assignments
   # GET /assignments.json
@@ -61,6 +62,11 @@ class AssignmentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_assignment
       @assignment = Assignment.find(params[:id])
+    end
+
+    def correct_teacher
+      @assignment = current_teacher.assignments.find_by(id: params[:id])
+      redirect_to teacher_root_path, notice: "Not authorized to edit this assignment" if @assignment.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

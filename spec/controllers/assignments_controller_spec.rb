@@ -39,9 +39,15 @@ RSpec.describe AssignmentsController, type: :controller do
     before { sign_in teacher }
 
     it "assigns the requested assignment as @assignment" do
-      assignment = FactoryGirl.create(:assignment)
+      assignment = FactoryGirl.create(:assignment, teacher_id: "1")
       get :edit, id: assignment
       assigns(:assignment).should eq(assignment)
+    end
+
+    it "redirects if correct_user is false" do
+      assignment = FactoryGirl.create(:assignment, teacher_id: "2")
+      get :edit, id: assignment
+      response.should redirect_to(root_path)
     end
   end
 
@@ -86,7 +92,6 @@ RSpec.describe AssignmentsController, type: :controller do
     before { sign_in teacher }
 
     context "with valid params" do
-
       it "updates the requested assignment" do
         assignment = FactoryGirl.create(:assignment)
         put :update, id: assignment, assignment: FactoryGirl.attributes_for(:assignment, name: "Read page 1")
@@ -94,13 +99,13 @@ RSpec.describe AssignmentsController, type: :controller do
       end
 
       it "assigns the requested assignment as @assignment" do
-        assignment = FactoryGirl.create(:assignment)
+        assignment = FactoryGirl.create(:assignment, teacher_id: "1")
         put :update, id: assignment, assignment: FactoryGirl.attributes_for(:assignment, name: "Read page 1")
         assigns(:assignment).should eq(assignment)
       end
 
       it "redirects to the assignment" do
-        assignment = FactoryGirl.create(:assignment)
+        assignment = FactoryGirl.create(:assignment, teacher_id: "1")
         put :update, id: assignment, assignment: FactoryGirl.attributes_for(:assignment, name: "Read page 1")
         response.should redirect_to(assignment)
       end
@@ -108,15 +113,21 @@ RSpec.describe AssignmentsController, type: :controller do
 
     context "with invalid params" do
       it "assigns the assignment as @assignment" do
-        assignment = FactoryGirl.create(:assignment)
+        assignment = FactoryGirl.create(:assignment, teacher_id: "1")
         put :update, id: assignment, assignment: FactoryGirl.attributes_for(:assignment, name: nil)
         expect(assigns(:assignment)).to eq(assignment)
       end
 
       it "re-renders the 'edit' template" do
-        assignment = FactoryGirl.create(:assignment)
+        assignment = FactoryGirl.create(:assignment, teacher_id: "1")
         put :update, id: assignment, assignment: FactoryGirl.attributes_for(:assignment, name: nil)
         expect(response).to render_template("edit")
+      end
+
+      it "redirects if correct_user is false" do
+        assignment = FactoryGirl.create(:assignment, teacher_id: "2")
+        put :update, id: assignment, assignment: FactoryGirl.attributes_for(:assignment, name: nil)
+        response.should redirect_to(root_path)
       end
     end
   end
@@ -125,17 +136,27 @@ RSpec.describe AssignmentsController, type: :controller do
     let(:teacher) { FactoryGirl.create(:teacher) }
     before { sign_in teacher }
 
-    it "destroys the requested assignment" do
-      assignment = FactoryGirl.create(:assignment)
-      expect {
+    context "with valid params" do
+      it "destroys the requested assignment" do
+        assignment = FactoryGirl.create(:assignment, teacher_id: "1")
+        expect {
+          delete :destroy, id: assignment
+        }.to change(Assignment, :count).by(-1)
+      end
+
+      it "redirects to the assignments list" do
+        assignment = FactoryGirl.create(:assignment, teacher_id: "1")
         delete :destroy, id: assignment
-      }.to change(Assignment, :count).by(-1)
+        response.should redirect_to(assignments_url)
+      end
     end
 
-    it "redirects to the assignments list" do
-      assignment = FactoryGirl.create(:assignment)
-      delete :destroy, id: assignment
-      response.should redirect_to(assignments_url)
+    context "with invalid params" do
+      it "redirects if correct_user is false" do
+        assignment = FactoryGirl.create(:assignment, teacher_id: "2")
+        delete :destroy, id: assignment
+        response.should redirect_to(root_path)
+      end
     end
   end
 

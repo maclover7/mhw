@@ -50,7 +50,7 @@ RSpec.describe CoursesController, type: :controller do
   describe "GET #edit" do
     let(:teacher) { FactoryGirl.create(:teacher) }
     before { sign_in teacher }
-    before { @course = FactoryGirl.create(:course) }
+    before { @course = FactoryGirl.create(:course, teacher_id: "1") }
 
     it "assigns the requested course as @course" do
       get :edit, id: @course
@@ -61,6 +61,12 @@ RSpec.describe CoursesController, type: :controller do
       get :edit, id: @course
       response.should render_template 'edit'
       response.status.should eq(200)
+    end
+
+    it "redirects if correct_user is false" do
+      @course = FactoryGirl.create(:course, teacher_id: "2")
+      get :edit, id: @course
+      response.should redirect_to(root_path)
     end
   end
 
@@ -106,7 +112,7 @@ RSpec.describe CoursesController, type: :controller do
     before { sign_in teacher }
 
     context "with valid params" do
-      before { @course = FactoryGirl.create(:course) }
+      before { @course = FactoryGirl.create(:course, teacher_id: "1") }
       it "updates the requested course" do
         put :update, id: @course, course: FactoryGirl.attributes_for(:course, name: "english")
         @course.reload
@@ -124,15 +130,21 @@ RSpec.describe CoursesController, type: :controller do
     end
 
     context "with invalid params" do
-      before { @course = FactoryGirl.create(:course) }
+      before { @course = FactoryGirl.create(:course, teacher_id: "1") }
       it "assigns the course as @course" do
-        put :update, id: @course, course: FactoryGirl.attributes_for(:course, name: "")
+        put :update, id: @course, course: FactoryGirl.attributes_for(:course, name: nil)
         assigns(:course).should eq(@course)
       end
 
       it "re-renders the 'edit' template" do
-        put :update, id: @course, course: FactoryGirl.attributes_for(:course, name: "")
+        put :update, id: @course, course: FactoryGirl.attributes_for(:course, name: nil)
         response.should render_template("edit")
+      end
+
+      it "redirects if correct_user is false" do
+        @course = FactoryGirl.create(:course, teacher_id: "2")
+        put :update, id: @course, course: FactoryGirl.attributes_for(:course, name: nil)
+        response.should redirect_to(root_path)
       end
     end
   end
@@ -140,17 +152,27 @@ RSpec.describe CoursesController, type: :controller do
   describe "DELETE #destroy" do
     let(:teacher) { FactoryGirl.create(:teacher) }
     before { sign_in teacher }
-    before { @course = FactoryGirl.create(:course) }
+    before { @course = FactoryGirl.create(:course, teacher_id: "1") }
 
-    it "destroys the requested course" do
-      expect {
+    context "with valid params" do
+      it "destroys the requested course" do
+        expect {
+          delete :destroy, id: @course
+        }.to change(Course, :count).by(-1)
+      end
+
+      it "redirects to the courses list" do
         delete :destroy, id: @course
-      }.to change(Course, :count).by(-1)
+        response.should redirect_to(courses_url)
+      end
     end
 
-    it "redirects to the courses list" do
-      delete :destroy, id: @course
-      response.should redirect_to(courses_url)
+    context "with invalid params" do
+      it "redirects if correct_user is false" do
+        @course = FactoryGirl.create(:course, teacher_id: "2")
+        delete :destroy, id: @course
+        response.should redirect_to(root_path)
+      end
     end
   end
 
