@@ -17,24 +17,24 @@
     <p><strong>Assignments:</strong></p>
 
     <% if @assignments.any? %>
-      <% @assignments.each do |a| %>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Due Date</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td> <%= a.name %> </td>
-              <td>Tuesday</td>
-              <td> <%= a.body %> </td>
-            </tr>
-          </tbody>
-        </table>
-      <% end %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Due Date</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @assignments.each do |a| %>
+          <tr>
+            <td> <%= a.name %> </td>
+            <td>Tuesday</td>
+            <td> <%= a.body %> </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
     <% end %>
 
   </div>
