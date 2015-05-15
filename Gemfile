@@ -15,6 +15,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'devise'
 gem 'bootstrap-sass'
 gem 'puma'
+gem 'aws-sdk', '~> 1.6'
+gem 'paperclip'
 
 # Environment Dependencies
 group :development, :test do
