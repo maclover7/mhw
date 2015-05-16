@@ -4,6 +4,7 @@ RSpec.describe Course, type: :model do
   let(:course) { FactoryGirl.create(:course) }
 
   it { should have_many(:assignments) }
+  it { should have_many(:course_files) }
   it { should have_many(:course_links) }
   it { should have_many(:enrollments) }
   it { should belong_to(:teacher) }
