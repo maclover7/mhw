@@ -1,0 +1,30 @@
+<li><a data-toggle="modal" data-target=".add-file-modal">Upload a file</a></li>
+
+<div class="modal fade add-file-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title center" id="mySmallModalLabel">Upload a File
+          <a class="anchorjs-link" href="#mySmallModalLabel"><span class="anchorjs-icon"></span></a>
+        </h4>
+      </div>
+
+      <div class="modal-body">
+        <%= form_for :course_file, url: add_file_course_path(course), html: { multipart: true, method: :post } do |f| %>
+          <div class="form-group">
+            <%= f.label :file %>
+            <%= f.file_field :file, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.hidden_field :course_id, type: "hidden", value: "#{course.id}" %>
+          </div>
+          <div class="form-group">
+            <%= f.submit "Upload File", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

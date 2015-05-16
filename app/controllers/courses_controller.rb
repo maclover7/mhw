@@ -14,6 +14,7 @@ class CoursesController < ApplicationController
   def show
     @assignments = @course.assignments
     @course_links = @course.course_links
+    @course_files = @course.course_files
   end
 
   # GET /courses/new
@@ -79,6 +80,25 @@ class CoursesController < ApplicationController
 
     @course_link.destroy
     flash[:alert] = "Link deleted!"
+    redirect_to course_path(@course)
+  end
+
+  def add_file
+    @course = Course.find(params[:id])
+    file = params[:course_file][:file]
+    @course_file = CourseFile.new(file: file, course_id: @course.id)
+    if @course_file.save
+      flash[:alert] = "File saved!"
+      redirect_to teacher_root_path
+    end
+  end
+
+  def delete_file
+    @course = Course.find(params[:id])
+    @course_file = CourseFile.find(params[:file_id])
+
+    @course_file.destroy
+    flash[:alert] = "File deleted!"
     redirect_to course_path(@course)
   end
 
