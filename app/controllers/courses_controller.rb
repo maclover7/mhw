@@ -89,7 +89,9 @@ class CoursesController < ApplicationController
     @course_file = CourseFile.new(file: file, course_id: @course.id)
     if @course_file.save
       flash[:alert] = "File saved!"
-      redirect_to teacher_root_path
+      redirect_to course_path(@course)
+    else
+      flash[:alert] = "The file did not save properly."
     end
   end
 

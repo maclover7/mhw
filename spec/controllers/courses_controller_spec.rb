@@ -230,7 +230,7 @@ RSpec.describe CoursesController, type: :controller do
 
       it "redirects to teacher_root path" do
         post :add_file, id: course, course_file: FactoryGirl.attributes_for(:course_file)
-        response.should redirect_to(teacher_root_path)
+        response.should redirect_to(course_path(course))
       end
     end
   end

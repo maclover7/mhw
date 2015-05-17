@@ -17,6 +17,7 @@ gem 'bootstrap-sass'
 gem 'puma'
 gem 'aws-sdk', '~> 1.6'
 gem 'paperclip'
+gem 'figaro'
 
 # Environment Dependencies
 group :development, :test do

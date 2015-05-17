@@ -19,3 +19,6 @@
 # Ignore Spring and Coveralls
 /coverage/*
 /spring
+
+# Ignore application configuration
+/config/application.yml

@@ -14,10 +14,12 @@ Rails.application.routes.draw do
 
   post "/students/:id/add_course" => "students#add_course", as: :add_course_student
   delete "/students/:id/leave_course/:course_id" => "students#leave_course", as: :leave_course_student
+
   post "/courses/:id/add_link" => "courses#add_link", as: :add_link_course
   delete "/courses/:id/delete_link/:link_id" => "courses#delete_link", as: :delete_link_course
+
   post "/courses/:id/add_file" => "courses#add_file", as: :add_file_course
-  post "/courses/:id/delete_file/:file_id" => "courses#delete_file", as: :delete_file_course
+  delete "/courses/:id/delete_file/:file_id" => "courses#delete_file", as: :delete_file_course
 
   devise_for :users, skip: :registrations
   devise_for :students, :teachers, controllers: { registrations: "registrations" }, skip: :sessions
