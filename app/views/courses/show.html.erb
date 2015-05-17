@@ -76,7 +76,7 @@
     <ul>
       <% @course_files.each do |f| %>
         <li>
-          <%= link_to f.file.url, f.file.url %>
+          <%= link_to f.name, f.file.url %>
           <%= link_to delete_file_course_path(@course, f), method: :delete, data: { confirm: 'Are you sure you want to delete this file?' } do %>
             <span class="glyphicon glyphicon-trash"></span>
           <% end %>

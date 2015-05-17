@@ -12,6 +12,10 @@
 
       <div class="modal-body">
         <%= form_for :course_file, url: add_file_course_path(course), html: { multipart: true, method: :post } do |f| %>
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
           <div class="form-group">
             <%= f.label :file %>
             <%= f.file_field :file, class: "form-control" %>

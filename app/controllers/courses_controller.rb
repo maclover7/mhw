@@ -85,13 +85,15 @@ class CoursesController < ApplicationController
 
   def add_file
     @course = Course.find(params[:id])
+    name = params[:course_file][:name]
     file = params[:course_file][:file]
-    @course_file = CourseFile.new(file: file, course_id: @course.id)
+    @course_file = CourseFile.new(file: file, name: name, course_id: @course.id)
     if @course_file.save
       flash[:alert] = "File saved!"
       redirect_to course_path(@course)
     else
       flash[:alert] = "The file did not save properly."
+      redirect_to teacher_root_path
     end
   end
 

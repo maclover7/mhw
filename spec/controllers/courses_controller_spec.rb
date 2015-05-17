@@ -233,6 +233,19 @@ RSpec.describe CoursesController, type: :controller do
         response.should redirect_to(course_path(course))
       end
     end
+
+    context "with invalid course_file" do
+      it "does notcreates a course_file" do
+        expect {
+          post :add_file, id: course, course_file: FactoryGirl.attributes_for(:course_file, name: nil)
+        }.to change(CourseFile, :count).by(0)
+      end
+
+      it "redirects to teacher_root path" do
+        post :add_file, id: course, course_file: FactoryGirl.attributes_for(:course_file, name: nil)
+        response.should redirect_to(teacher_root_path)
+      end
+    end
   end
 
   describe "DELETE #delete_file" do
