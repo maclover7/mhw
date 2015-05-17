@@ -19,7 +19,7 @@
       <tr>
         <td><%= assignment.name %></td>
         <td><%= assignment.body %></td>
-        <td><%= assignment.due_date %></td>
+        <td><%= assignment.due_date.strftime("%A, %B %d") %></td>
         <td><%= assignment.course_id %></td>
         <td><%= assignment.teacher_id %></td>
         <td><%= link_to 'Show', assignment %></td>

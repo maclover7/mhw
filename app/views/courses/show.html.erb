@@ -29,7 +29,7 @@
           <% @assignments.each do |a| %>
           <tr>
             <td> <%= a.name %> </td>
-            <td>Tuesday</td>
+            <td> <%= a.due_date.strftime("%A, %B %d") %> </td>
             <td> <%= a.body %> </td>
           </tr>
           <% end %>
