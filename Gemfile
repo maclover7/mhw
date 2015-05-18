@@ -18,6 +18,7 @@ gem 'puma'
 gem 'aws-sdk', '~> 1.6'
 gem 'paperclip'
 gem 'figaro'
+gem 'delayed_job_active_record'
 
 # Environment Dependencies
 group :development, :test do
