@@ -27,9 +27,10 @@ class AssignmentsController < ApplicationController
   # POST /assignments.json
   def create
     @assignment = current_teacher.assignments.build(assignment_params) #Assignment.new(assignment_params)
-
+    
     respond_to do |format|
       if @assignment.save
+        @assignment.delay.create_student_assignments!
         format.html { redirect_to @assignment, notice: 'Assignment was successfully created.' }
       else
         format.html { render :new }
@@ -52,6 +53,7 @@ class AssignmentsController < ApplicationController
   # DELETE /assignments/1
   # DELETE /assignments/1.json
   def destroy
+    @assignment.delay.destroy_student_assignments!
     @assignment.destroy
     respond_to do |format|
       format.html { redirect_to assignments_url, notice: 'Assignment was successfully destroyed.' }
