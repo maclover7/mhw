@@ -60,13 +60,13 @@
       </thead>
 
       <tbody>
-        <% @assignments.each do |a| %>
+        <% @student_assignments.each do |sa| %>
           <tr>
             <td>check</td>
-            <td> <%= a.name %> </td>
-            <td> <%= a.course.name %> </td>
-            <td> <%= a.due_date.strftime("%A, %B %d") %> </td>
-            <td> <%= a.body %> </td>
+            <td> <%= sa.assignment.name %> </td>
+            <td> <%= sa.assignment.course.name %> </td>
+            <td> <%= sa.assignment.due_date.strftime("%A, %B %d") %> </td>
+            <td> <%= sa.assignment.body %> </td>
             <td><span class="glyphicon glyphicon-pencil"></span></td>
           </tr>
         <% end %>

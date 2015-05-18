@@ -27,7 +27,7 @@ class AssignmentsController < ApplicationController
   # POST /assignments.json
   def create
     @assignment = current_teacher.assignments.build(assignment_params) #Assignment.new(assignment_params)
-    
+
     respond_to do |format|
       if @assignment.save
         @assignment.delay.create_student_assignments!

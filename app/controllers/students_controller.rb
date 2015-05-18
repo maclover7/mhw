@@ -4,7 +4,7 @@ class StudentsController < ApplicationController
   def index
     @student = current_student
     @courses = current_student.courses
-    @assignments = Assignment.where(course_id: @courses).all #current_student.courses.assignments
+    @student_assignments = StudentAssignment.where(student_id: current_student.id).all
   end
 
   def add_course
