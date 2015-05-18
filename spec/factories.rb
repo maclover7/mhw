@@ -30,6 +30,11 @@ FactoryGirl.define do
     student_id { Faker::Number.digit }
   end
 
+  factory :student_assignment do
+    assignment_id { Faker::Number.digit }
+    student_id { Faker::Number.digit }
+  end
+
   factory :student, traits: [:user]
   factory :teacher, traits: [:user]
   factory :user, traits: [:user]

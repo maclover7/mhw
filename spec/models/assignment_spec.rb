@@ -9,6 +9,7 @@ RSpec.describe Assignment, type: :model do
   end
 
   it { should belong_to(:course) }
+  it { should have_many(:student_assignments) }
   it { should belong_to(:teacher) }
 
   context "with no name" do
