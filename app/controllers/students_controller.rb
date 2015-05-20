@@ -32,4 +32,24 @@ class StudentsController < ApplicationController
     end
     redirect_to student_root_path
   end
+
+  def complete_assignment
+    @student_assignment = StudentAssignment.find(params[:id])
+    @student_assignment.completed = true
+    @student_assignment.save
+    respond_to do |format|
+      format.html { redirect_to student_root_path }
+      format.js
+    end
+  end
+
+  def uncomplete_assignment
+    @student_assignment = StudentAssignment.find(params[:id])
+    @student_assignment.completed = false
+    @student_assignment.save
+    respond_to do |format|
+      format.html { redirect_to student_root_path }
+      format.js
+    end
+  end
 end

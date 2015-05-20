@@ -51,23 +51,21 @@
       <thead>
         <tr>
           <th width="2%">Done</th>
-          <th width="20%">Title</th>
+          <th width="2%">Title</th>
           <th width="20%">Course</th>
           <th width="20%">Due Date</th>
-          <th width="35%">Details</th>
-          <th width="3%">Edit</th>
+          <th width="38%">Details</th>
         </tr>
       </thead>
 
       <tbody>
         <% @student_assignments.each do |sa| %>
           <tr>
-            <td>check</td>
+            <td> <%= render "students/sa", sa: sa %> </td>
             <td> <%= sa.assignment.name %> </td>
             <td> <%= sa.assignment.course.name %> </td>
             <td> <%= sa.assignment.due_date.strftime("%A, %B %d") %> </td>
             <td> <%= sa.assignment.body %> </td>
-            <td><span class="glyphicon glyphicon-pencil"></span></td>
           </tr>
         <% end %>
       </tbody>

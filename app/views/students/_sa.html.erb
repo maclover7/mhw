@@ -1,0 +1,23 @@
+<% if sa.completed? %>
+
+  <%= form_for sa, url: uncomplete_student_assignment_path(sa), remote: true do |f| %>
+    <div class="form-group">
+      <%= f.check_box :completed, class: "form-control", onchange: "$('#edit_student_assignment_#{sa.id}').submit();" %>
+    </div>
+    <div class="form-group">
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
+<% else %>
+
+  <%= form_for sa, url: complete_student_assignment_path(sa), remote: true do |f| %>
+    <div class="form-group">
+      <%= f.check_box :completed, class: "form-control", onchange: "$('#edit_student_assignment_#{sa.id}').submit();" %>
+    </div>
+    <div class="form-group">
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+  <% end %>
+  
+<% end %>

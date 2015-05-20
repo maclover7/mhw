@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   post "/students/:id/add_course" => "students#add_course", as: :add_course_student
   delete "/students/:id/leave_course/:course_id" => "students#leave_course", as: :leave_course_student
 
+  patch "/student_assignments/:id/complete" => "students#complete_assignment", as: :complete_student_assignment
+  patch "/student_assignments/:id/uncomplete" => "students#uncomplete_assignment", as: :uncomplete_student_assignment
+
   post "/courses/:id/add_link" => "courses#add_link", as: :add_link_course
   delete "/courses/:id/delete_link/:link_id" => "courses#delete_link", as: :delete_link_course
 
