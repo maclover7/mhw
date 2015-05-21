@@ -4,6 +4,8 @@ class StudentsController < ApplicationController
   def index
     @student = current_student
     @courses = current_student.courses
+    @completed_assignments = StudentAssignment.where(student_id: current_student.id, completed: true).all
+    @uncompleted_assignments = StudentAssignment.where(student_id: current_student.id, completed: false).all
     @student_assignments = StudentAssignment.where(student_id: current_student.id).all
   end
 

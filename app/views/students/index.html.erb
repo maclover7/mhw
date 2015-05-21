@@ -60,13 +60,23 @@
 
       <tbody>
         <% @student_assignments.each do |sa| %>
-          <tr>
-            <td> <%= render "students/sa", sa: sa %> </td>
-            <td> <%= sa.assignment.name %> </td>
-            <td> <%= sa.assignment.course.name %> </td>
-            <td> <%= sa.assignment.due_date.strftime("%A, %B %d") %> </td>
-            <td> <%= sa.assignment.body %> </td>
-          </tr>
+          <% if sa.completed? %>
+            <tr>
+              <td> <%= render "students/sa", sa: sa %> </td>
+              <td><del> <%= sa.assignment.name %> </del></td>
+              <td><del> <%= sa.assignment.course.name %> </del></td>
+              <td><del> <%= sa.assignment.due_date.strftime("%A, %B %d") %> </del></td>
+              <td><del> <%= sa.assignment.body %> </del></td>
+            </tr>
+          <% else %>
+            <tr>
+              <td> <%= render "students/sa", sa: sa %> </td>
+              <td> <%= sa.assignment.name %> </td>
+              <td> <%= sa.assignment.course.name %> </td>
+              <td> <%= sa.assignment.due_date.strftime("%A, %B %d") %> </td>
+              <td> <%= sa.assignment.body %> </td>
+            </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>
