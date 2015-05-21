@@ -18,11 +18,11 @@ Rails.application.routes.draw do
   patch "/student_assignments/:id/complete" => "students#complete_assignment", as: :complete_student_assignment
   patch "/student_assignments/:id/uncomplete" => "students#uncomplete_assignment", as: :uncomplete_student_assignment
 
-  post "/courses/:id/add_link" => "courses#add_link", as: :add_link_course
-  delete "/courses/:id/delete_link/:link_id" => "courses#delete_link", as: :delete_link_course
+  post "/courses/:id/add_link" => "addons#add_link", as: :add_link_course
+  delete "/courses/:id/delete_link/:link_id" => "addons#delete_link", as: :delete_link_course
 
-  post "/courses/:id/add_file" => "courses#add_file", as: :add_file_course
-  delete "/courses/:id/delete_file/:file_id" => "courses#delete_file", as: :delete_file_course
+  post "/courses/:id/add_file" => "addons#add_file", as: :add_file_course
+  delete "/courses/:id/delete_file/:file_id" => "addons#delete_file", as: :delete_file_course
 
   devise_for :users, skip: :registrations
   devise_for :students, :teachers, controllers: { registrations: "registrations" }, skip: :sessions
