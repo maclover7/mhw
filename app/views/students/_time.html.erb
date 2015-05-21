@@ -1,0 +1,49 @@
+<% if @student_assignments? %>
+  <h3>This week</h3><p>Monday, June 4th, 2015 to Friday, June 8th, 2015</p>
+  <p><a class="btn btn-primary" href="#"><span class="glyphicon glyphicon-plus"></span> Add Assignment</a></p>
+
+  <div class="panel panel-default">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th width="2%">Done</th>
+          <th width="2%">Title</th>
+          <th width="20%">Course</th>
+          <th width="20%">Due Date</th>
+          <th width="38%">Details</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @student_assignments.each do |sa| %>
+          <% if sa.completed? %>
+            <tr>
+              <td> <%= render "students/sa", sa: sa %> </td>
+              <td><del> <%= sa.assignment.name %> </del></td>
+              <td><del> <%= sa.assignment.course.name %> </del></td>
+              <td><del> <%= sa.assignment.due_date.strftime("%A, %B %d") %> </del></td>
+              <td><del> <%= sa.assignment.body %> </del></td>
+            </tr>
+          <% else %>
+            <tr>
+              <td> <%= render "students/sa", sa: sa %> </td>
+              <td> <%= sa.assignment.name %> </td>
+              <td> <%= sa.assignment.course.name %> </td>
+              <td> <%= sa.assignment.due_date.strftime("%A, %B %d") %> </td>
+              <td> <%= sa.assignment.body %> </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+<% else %>
+
+  <div class="well">
+    <h2 class="center">No work to do here! <span class="glyphicon glyphicon-sunglasses"></span></h2>
+    <br>
+    <p class="center">Go outside and play or something.</p>
+  </div>
+
+<% end %>
