@@ -8,7 +8,7 @@
       <p><a href="#"><span class="badge">3</span> Tomorrow</a></p>
       <p><a href="#"><span class="badge">3</span> This week</a></p>
       <p><a href="#"><span class="badge">3</span> Next 2 Weeks</a></p>
-      <p><a href="#"><span class="badge">3</span> All Assignments</a></p>
+      <p><a href="?time=all"><span class="badge"> <%= @all_assignments.count %> </span> All Assignments</a></p>
     </div>
 
     <div class="well">
@@ -31,9 +31,9 @@
     <% if params[:time] == nil %>
       <%= render "students/default" %>
 
-    <% elsif params[:time] == "1" %>
+    <% elsif params[:time] %>
       <%= render "students/time" %>
-      
+
     <% end %>
 
   </div>
