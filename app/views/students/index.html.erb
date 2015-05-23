@@ -4,11 +4,21 @@
       <h4>Upcoming Assignments:</h4>
       <hr>
       <p><a href="#"><span class="badge">3</span> Overdue</a></p>
-      <p><a href="#"><span class="badge">3</span> Today</a></p>
+      <p><a href="?time=today"><span class="badge">
+        <% if @today_assignments %>
+          <%= @today_assignments.count %>
+        <% else %>
+          0
+        <% end %></span> Today</a></p>
       <p><a href="#"><span class="badge">3</span> Tomorrow</a></p>
       <p><a href="#"><span class="badge">3</span> This week</a></p>
       <p><a href="#"><span class="badge">3</span> Next 2 Weeks</a></p>
-      <p><a href="?time=all"><span class="badge"> <%= @all_assignments.count %> </span> All Assignments</a></p>
+      <p><a href="?time=all"><span class="badge">
+        <% if @all_assignments %>
+          <%= @all_assignments.count %>
+        <% else %>
+          0
+        <% end %></span> All Assignments</a></p>
     </div>
 
     <div class="well">
