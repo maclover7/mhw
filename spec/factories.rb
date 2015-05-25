@@ -6,6 +6,7 @@ FactoryGirl.define do
     due_date { Faker::Time.forward(23, :morning) }
     course_id { Faker::Number.digit }
     teacher_id { Faker::Number.digit }
+    category "Quiz"
   end
 
   factory :course do

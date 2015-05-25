@@ -7,10 +7,10 @@
       <thead>
         <tr>
           <th width="2%">Done</th>
-          <th width="2%">Title</th>
+          <th width="20%">Title</th>
           <th width="20%">Course</th>
           <th width="20%">Due Date</th>
-          <th width="38%">Details</th>
+          <th width="35%">Details</th>
         </tr>
       </thead>
 
@@ -27,7 +27,18 @@
           <% else %>
             <tr>
               <td> <%= render "students/sa", sa: sa %> </td>
-              <td> <%= sa.assignment.name %> </td>
+              <td>
+                <% if sa.assignment.category == "Homework" %>
+                  <span class="label label-default">Homework</span>
+                <% elsif sa.assignment.category == "Quiz" %>
+                  <span class="label label-warning">Quiz</span>
+                <% elsif sa.assignment.category == "Test" %>
+                  <span class="label label-danger">Test</span>
+                <% elsif sa.assignment.category == "Project" %>
+                  <span class="label label-info">Project</span>
+                <% end %>
+                <%= sa.assignment.name %>
+              </td>
               <td> <%= sa.assignment.course.name %> </td>
               <td> <%= sa.assignment.due_date.strftime("%A, %B %d") %> </td>
               <td> <%= sa.assignment.body %> </td>
