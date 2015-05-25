@@ -34,7 +34,7 @@ class StudentsController < ApplicationController
 
     ## Count Info:
     @today = Date.today.strftime("%A, %B %d")
-    @today_assignments = StudentAssignment.where(student_id: current_student.id) #, assignment_due_date: @today).all
+    @today_assignments = StudentAssignment.where(student_id: current_student.id).all #, assignment_due_date: @today).all
     @all_assignments = StudentAssignment.where(student_id: current_student.id).all
   end
 

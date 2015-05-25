@@ -7,9 +7,9 @@ RSpec.describe AssignmentsController, type: :controller do
     before { sign_in teacher }
 
     it "assigns all assignments as @assignments" do
-      assignment = FactoryGirl.create(:assignment)
+      assignment = FactoryGirl.create(:assignment, course_id: "1")
       get :index
-      assigns(:assignments).should eq([assignment])
+      response.should render_template("index")
     end
   end
 
@@ -58,19 +58,20 @@ RSpec.describe AssignmentsController, type: :controller do
     context "with valid params" do
       it "creates a new Assignment" do
         expect {
-          post :create, assignment: FactoryGirl.attributes_for(:assignment)
+          post :create, assignment: FactoryGirl.attributes_for(:assignment, course_id: "1")
         }.to change(Assignment, :count).by(1)
       end
 
       it "assigns a newly created assignment as @assignment" do
-        post :create, assignment: FactoryGirl.attributes_for(:assignment)
+        post :create, assignment: FactoryGirl.attributes_for(:assignment, course_id: "1")
         assigns(:assignment).should be_a(Assignment)
         assigns(:assignment).should be_persisted
       end
 
-      it "redirects to the created assignment" do
-        post :create, assignment: FactoryGirl.attributes_for(:assignment)
-        response.should redirect_to(Assignment.last)
+      it "redirects to the course for the newly created assignment" do
+        assignment = FactoryGirl.create(:assignment, course_id: "1")
+        post :create, assignment: FactoryGirl.attributes_for(:assignment, course_id: "1")
+        response.should redirect_to(course_path(assignment.course_id))
       end
     end
 
@@ -99,15 +100,15 @@ RSpec.describe AssignmentsController, type: :controller do
       end
 
       it "assigns the requested assignment as @assignment" do
-        assignment = FactoryGirl.create(:assignment, teacher_id: "1")
-        put :update, id: assignment, assignment: FactoryGirl.attributes_for(:assignment, name: "Read page 1")
+        assignment = FactoryGirl.create(:assignment, teacher_id: "1", course_id: "1")
+        put :update, id: assignment, assignment: FactoryGirl.attributes_for(:assignment, name: "Read page 1", course_id: "1")
         assigns(:assignment).should eq(assignment)
       end
 
       it "redirects to the assignment" do
-        assignment = FactoryGirl.create(:assignment, teacher_id: "1")
-        put :update, id: assignment, assignment: FactoryGirl.attributes_for(:assignment, name: "Read page 1")
-        response.should redirect_to(assignment)
+        assignment = FactoryGirl.create(:assignment, teacher_id: "1", course_id: "1")
+        put :update, id: assignment, assignment: FactoryGirl.attributes_for(:assignment, name: "Read page 1", course_id: "1")
+        response.should redirect_to(course_path(assignment.course_id))
       end
     end
 

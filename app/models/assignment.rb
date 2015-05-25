@@ -4,8 +4,8 @@ class Assignment < ActiveRecord::Base
   belongs_to :teacher
 
   validates_presence_of :name, :body, :due_date
-  
-  private
+
+  #private
     def create_student_assignments!
       @assignment = self
       @course = Course.find_by_id(@assignment.course_id)
@@ -20,5 +20,10 @@ class Assignment < ActiveRecord::Base
     end
 
     def destroy_student_assignments!
+      @assignment_id = self.id
+      @student_assignments = StudentAssignment.where(assignment_id: @assignment_id).all
+      @student_assignments.each do |sa|
+        sa.destroy
+      end
     end
 end

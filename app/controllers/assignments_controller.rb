@@ -6,7 +6,7 @@ class AssignmentsController < ApplicationController
   # GET /assignments
   # GET /assignments.json
   def index
-    @assignments = Assignment.all
+    @assignments = Assignment.where(teacher_id: current_teacher).all
   end
 
   # GET /assignments/1
@@ -31,7 +31,7 @@ class AssignmentsController < ApplicationController
     respond_to do |format|
       if @assignment.save
         @assignment.delay.create_student_assignments!
-        format.html { redirect_to @assignment, notice: 'Assignment was successfully created.' }
+        format.html { redirect_to course_path(@assignment.course_id), notice: 'Assignment was successfully created.' }
       else
         format.html { render :new }
       end
@@ -43,7 +43,7 @@ class AssignmentsController < ApplicationController
   def update
     respond_to do |format|
       if @assignment.update(assignment_params)
-        format.html { redirect_to @assignment, notice: 'Assignment was successfully updated.' }
+        format.html { redirect_to course_path(@assignment.course_id), notice: 'Assignment was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -53,7 +53,7 @@ class AssignmentsController < ApplicationController
   # DELETE /assignments/1
   # DELETE /assignments/1.json
   def destroy
-    @assignment.delay.destroy_student_assignments!
+    @assignment.destroy_student_assignments!
     @assignment.destroy
     respond_to do |format|
       format.html { redirect_to assignments_url, notice: 'Assignment was successfully destroyed.' }

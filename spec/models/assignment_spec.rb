@@ -31,4 +31,9 @@ RSpec.describe Assignment, type: :model do
     it "creates a student_assignment" do
     end
   end
+
+  describe "destroy_student_assignments!" do
+    it "destroys a student_assignment" do
+    end
+  end
 end

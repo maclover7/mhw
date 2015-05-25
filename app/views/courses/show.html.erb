@@ -3,7 +3,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-4">
     <p>
       <strong>Teacher:</strong>
       <%= @course.teacher.name %>
@@ -13,7 +13,7 @@
       <%= @course.description %>
     </p>
   </div>
-  <div class="col-md-9">
+  <div class="col-md-8">
     <p><strong>Assignments:</strong></p>
 
     <% if @assignments.any? %>
@@ -23,6 +23,7 @@
             <th>Title</th>
             <th>Due Date</th>
             <th>Details</th>
+            <th colspan="3"></th>
           </tr>
         </thead>
         <tbody>
@@ -31,6 +32,14 @@
             <td> <%= a.name %> </td>
             <td> <%= a.due_date.strftime("%A, %B %d") %> </td>
             <td> <%= a.body %> </td>
+            <td>
+              <%= link_to edit_assignment_path(a), class: "navbar-brand" do %>
+                <span class="glyphicon glyphicon-pencil"></span>
+              <% end %>
+              <%= link_to assignment_path(a), class: "navbar-brand", method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <span class="glyphicon glyphicon-trash"></span>
+              <% end %>
+            </td>
           </tr>
           <% end %>
         </tbody>
