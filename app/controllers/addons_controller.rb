@@ -1,6 +1,7 @@
 class AddonsController < ApplicationController
   before_action :set_course
   before_action :authenticate_teacher!
+  before_action :teacher_course
 
   def add_link
     name = params[:course_link][:name]
@@ -47,5 +48,10 @@ class AddonsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_course
       @course = Course.find(params[:id])
+    end
+
+    def teacher_course
+      @course = current_teacher.courses.find_by(id: params[:id])
+      redirect_to teacher_root_path, notice: "Not authorized to edit this course" if @course.nil?
     end
 end

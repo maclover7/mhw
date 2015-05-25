@@ -5,7 +5,7 @@ RSpec.describe AddonsController, type: :controller do
   describe "POST #add_link" do
     let(:teacher) { FactoryGirl.create(:teacher) }
     before { sign_in teacher }
-    let(:course) { FactoryGirl.create(:course) }
+    let(:course) { FactoryGirl.create(:course, teacher_id: teacher.id) }
 
     context "with valid course_link" do
       it "creates a course_link" do
@@ -24,8 +24,8 @@ RSpec.describe AddonsController, type: :controller do
   describe "DELETE #delete_link" do
     let(:teacher) { FactoryGirl.create(:teacher) }
     before { sign_in teacher }
-    let(:course) { FactoryGirl.create(:course) }
-    before(:each) { @course_link = FactoryGirl.create(:course_link) }
+    let(:course) { FactoryGirl.create(:course, teacher_id: teacher.id) }
+    before(:each) { @course_link = FactoryGirl.create(:course_link, course_id: course.id) }
 
     context "with valid course_link" do
       it "removes the course_link" do
@@ -44,8 +44,7 @@ RSpec.describe AddonsController, type: :controller do
   describe "POST #add_file" do
     let(:teacher) { FactoryGirl.create(:teacher) }
     before { sign_in teacher }
-    let(:course) { FactoryGirl.create(:course) }
-    let(:course_file) { FactoryGirl.create(:course_file) }
+    let(:course) { FactoryGirl.create(:course, teacher_id: teacher.id) }
 
     context "with valid course_file" do
       it "creates a course_file" do
@@ -61,7 +60,7 @@ RSpec.describe AddonsController, type: :controller do
     end
 
     context "with invalid course_file" do
-      it "does notcreates a course_file" do
+      it "does not create a course_file" do
         expect {
           post :add_file, id: course, course_file: FactoryGirl.attributes_for(:course_file, name: nil)
         }.to change(CourseFile, :count).by(0)
@@ -77,8 +76,8 @@ RSpec.describe AddonsController, type: :controller do
   describe "DELETE #delete_file" do
     let(:teacher) { FactoryGirl.create(:teacher) }
     before { sign_in teacher }
-    let(:course) { FactoryGirl.create(:course) }
-    before(:each) { @course_file = FactoryGirl.create(:course_file) }
+    let(:course) { FactoryGirl.create(:course, teacher_id: teacher.id) }
+    before(:each) { @course_file = FactoryGirl.create(:course_file, course_id: course.id) }
 
     context "with valid course_file" do
       it "removes the course_file" do
