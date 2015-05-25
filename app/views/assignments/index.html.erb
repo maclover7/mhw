@@ -14,7 +14,18 @@
   <tbody>
     <% @assignments.each do |assignment| %>
       <tr>
-        <td><%= assignment.name %></td>
+        <td>
+          <% if assignment.category == "Homework" %>
+            <span class="label label-default">Homework</span>
+          <% elsif assignment.category == "Quiz" %>
+            <span class="label label-warning">Quiz</span>
+          <% elsif assignment.category == "Test" %>
+            <span class="label label-danger">Test</span>
+          <% elsif assignment.category == "Project" %>
+            <span class="label label-info">Project</span>
+          <% end %>
+          <%= assignment.name %>
+        </td>
         <td><%= assignment.body %></td>
         <td><%= assignment.due_date.strftime("%A, %B %d") %></td>
         <td><%= assignment.course.name %></td>
