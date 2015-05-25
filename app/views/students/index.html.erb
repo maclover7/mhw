@@ -27,6 +27,7 @@
       <% @courses.each do |course| %>
       <p>
         <%= link_to "#{course.name}", course %>
+        <a href="?course_id=<%= course.id%>"><span class="glyphicon glyphicon-book"></span></a>
         <%= link_to leave_course_student_path(@student, course), method: :delete, data: { confirm: 'Are you sure you want to leave this course?' } do %>
           <span class="glyphicon glyphicon-trash"></span>
         <% end %>
@@ -38,12 +39,10 @@
 
   <div class="col-md-9">
 
-    <% if params[:time] == nil %>
-      <%= render "students/default" %>
-
-    <% elsif params[:time] %>
+    <% if params[:time] or params[:course_id] %>
       <%= render "students/time" %>
-
+    <% else %>
+      <%= render "students/default" %>
     <% end %>
 
   </div>

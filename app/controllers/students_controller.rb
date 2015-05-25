@@ -32,6 +32,16 @@ class StudentsController < ApplicationController
       @page_heading = "All Assignments:"
     end
 
+    ## Per Course:
+    if params[:course_id]
+      if @course = current_student.courses.find_by_id(params[:course_id])
+        @page_heading = "#{@course.name} Assignments"
+        @student_assignments = StudentAssignment.where(student_id: current_student.id).all #, assignment_course_id: @course.id).all
+      else
+        redirect_to student_root_path, notice: "Not authorized to view assignments for this course" if @course.nil?
+      end
+    end
+
     ## Count Info:
     @today = Date.today.strftime("%A, %B %d")
     @today_assignments = StudentAssignment.where(student_id: current_student.id).all #, assignment_due_date: @today).all
