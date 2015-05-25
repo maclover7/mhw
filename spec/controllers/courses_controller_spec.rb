@@ -15,19 +15,39 @@ RSpec.describe CoursesController, type: :controller do
   end
 
   describe "GET #show" do
-    let(:teacher) { FactoryGirl.create(:teacher) }
-    before { sign_in teacher }
+    context "as a teacher" do
+      let(:teacher) { FactoryGirl.create(:teacher) }
+      before { sign_in teacher }
+      before { @course = FactoryGirl.create(:course, teacher_id: teacher.id) }
 
-    before { @course = FactoryGirl.create(:course) }
-    it "assigns the requested course as @course" do
-      get :show, id: @course
-      @course.should eq(@course)
+      it "assigns the requested course as @course" do
+        get :show, id: @course
+        @course.should eq(@course)
+      end
+
+      it "renders the show template" do
+        get :show, id: @course
+        response.should render_template 'show'
+        response.status.should eq(200)
+      end
     end
 
-    it "renders the show template" do
-      get :show, id: @course
-      response.should render_template 'show'
-      response.status.should eq(200)
+    context "as a student" do
+      let(:student) { FactoryGirl.create(:student) }
+      before { sign_in student }
+      before { @course = FactoryGirl.create(:course) }
+      before { @enrollment = FactoryGirl.create(:enrollment, course_id: @course.id, student_id: student.id) }
+
+      it "assigns the requested course as @course" do
+        get :show, id: @course
+        @course.should eq(@course)
+      end
+
+      it "renders the show template" do
+        get :show, id: @course
+        response.should render_template 'show'
+        response.status.should eq(200)
+      end
     end
   end
 

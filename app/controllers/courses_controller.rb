@@ -1,7 +1,9 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_teacher!
+  before_action :authenticate_teacher!, except: [:show]
+  before_action :authenticate_user!, only: [:show]
   before_action :correct_teacher, only: [:edit, :update, :destroy]
+  before_action :course_student, only: [:show]
 
   # GET /courses
   # GET /courses.json
@@ -70,6 +72,13 @@ class CoursesController < ApplicationController
     def correct_teacher
       @course = current_teacher.courses.find_by(id: params[:id])
       redirect_to teacher_root_path, notice: "Not authorized to edit this course" if @course.nil?
+    end
+
+    def course_student
+      if student_signed_in?
+        @course = current_student.courses.find_by(id: params[:id])
+        redirect_to student_root_path, notice: "Not authorized to view this course" if @course.nil?
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
