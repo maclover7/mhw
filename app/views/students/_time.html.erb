@@ -19,7 +19,18 @@
           <% if sa.completed == "true" %>
             <tr>
               <td> <%= render "students/sa", sa: sa %> </td>
-              <td><del> <%= sa.assignment.name %> </del></td>
+              <td>
+                <% if sa.assignment.category == "Homework" %>
+                  <span class="label label-default">Homework</span>
+                <% elsif sa.assignment.category == "Quiz" %>
+                  <span class="label label-warning">Quiz</span>
+                <% elsif sa.assignment.category == "Test" %>
+                  <span class="label label-danger">Test</span>
+                <% elsif sa.assignment.category == "Project" %>
+                  <span class="label label-info">Project</span>
+                <% end %>
+                <del> <%= sa.assignment.name %> </del>
+              </td>
               <td><del> <%= sa.assignment.course.name %> </del></td>
               <td><del> <%= sa.assignment.due_date.strftime("%A, %B %d") %> </del></td>
               <td><del> <%= sa.assignment.body %> </del></td>
