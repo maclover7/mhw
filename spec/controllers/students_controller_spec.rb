@@ -107,7 +107,7 @@ RSpec.describe StudentsController, type: :controller do
         student_assignment = FactoryGirl.create(:student_assignment, assignment_id: assignment.id, student_id: student.id)
 
         get :index, time: "week"
-        #assigns(:student_assignments).should eq([student_assignment])
+        assigns(:student_assignments).should eq([student_assignment])
       end
     end
 

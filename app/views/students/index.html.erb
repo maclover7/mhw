@@ -3,7 +3,7 @@
     <div class="well">
       <h4>Upcoming Assignments:</h4>
       <hr>
-      
+
       <p><a href="?time=overdue"><span class="badge">
         <% if @overdue_assignments %>
           <%= @overdue_assignments.count %>
@@ -25,8 +25,13 @@
           0
         <% end %></span> Tomorrow</a></p>
 
+      <p><a href="?time=week"><span class="badge">
+        <% if @week_assignments %>
+          <%= @week_assignments.count %>
+        <% else %>
+          0
+        <% end %></span> This week</a></p>
 
-      <p><a href="#"><span class="badge">3</span> This week</a></p>
       <p><a href="#"><span class="badge">3</span> Next 2 Weeks</a></p>
       <p><a href="?time=all"><span class="badge">
         <% if @all_assignments %>
