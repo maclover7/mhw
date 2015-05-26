@@ -10,20 +10,7 @@ class StudentsController < ApplicationController
     elsif params[:time] == "today"
       @page_heading = "Today's Assignments:"
       @today = Date.today.strftime("%A, %B %d")
-      #@student_assignments = StudentAssignment.where(id: "25", assignment_due_date: @today).all#where(student_id: current_student.id).all
-
-      #@sa.each do |sa|
-      #  if sa.assignment_due_date == @today
-      #    @student_assignments == sa
-      #  end
-      #end
-
-#        @sa1.each do |sa1|
-#          @date = sa1.assignment.due_date.strftime("%A, %B %d")
-#          if @date == Date.today.strftime("%A, %B %d")
-#            @student_assignments == sa1
-#          end
-#        end
+      @student_assignments = StudentAssignment.joins(:assignment).where("DATE(assignments.due_date) = ?", Date.today).all
     elsif params[:time] == "tomorrow"
     elsif params[:time] == "week"
     elsif params[:time] == "next_2_weeks"
@@ -35,7 +22,7 @@ class StudentsController < ApplicationController
     ## Per Course:
     if params[:course_id]
       if @course = current_student.courses.find_by_id(params[:course_id])
-        @page_heading = "#{@course.name} Assignments"
+        @page_heading = "#{@course.name} Assignments:"
         @student_assignments = StudentAssignment.where(student_id: current_student.id).all #, assignment_course_id: @course.id).all
       else
         redirect_to student_root_path, notice: "Not authorized to view assignments for this course" if @course.nil?
@@ -44,7 +31,8 @@ class StudentsController < ApplicationController
 
     ## Count Info:
     @today = Date.today.strftime("%A, %B %d")
-    @today_assignments = StudentAssignment.where(student_id: current_student.id).all #, assignment_due_date: @today).all
+    @today_assignments = StudentAssignment.joins(:assignment).where("DATE(assignments.due_date) = ?", Date.today).all
+
     @all_assignments = StudentAssignment.where(student_id: current_student.id).all
   end
 
