@@ -32,7 +32,13 @@
           0
         <% end %></span> This week</a></p>
 
-      <p><a href="#"><span class="badge">3</span> Next 2 Weeks</a></p>
+      <p><a href="?time=next_2_weeks"><span class="badge">
+        <% if @next_2_weeks_assignments %>
+          <%= @next_2_weeks_assignments.count %>
+        <% else %>
+          0
+        <% end %></span> Next 2 Weeks</a></p>
+
       <p><a href="?time=all"><span class="badge">
         <% if @all_assignments %>
           <%= @all_assignments.count %>

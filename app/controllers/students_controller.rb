@@ -19,6 +19,8 @@ class StudentsController < ApplicationController
       @page_heading = "This Week's Assignments:"
       @student_assignments = StudentAssignment.joins(:assignment).where("DATE(assignments.due_date) BETWEEN ? AND ?", Date.today.beginning_of_week, Date.today.end_of_week).all
     elsif params[:time] == "next_2_weeks"
+      @page_heading = "Next 2 Week's Assignments"
+      @student_assignments = StudentAssignment.joins(:assignment).where("DATE(assignments.due_date) BETWEEN ? AND ?", Date.today.beginning_of_week, Date.today.end_of_week + 7.days).all
     elsif params[:time] == "all"
       @page_heading = "All Assignments:"
       @student_assignments = StudentAssignment.where(student_id: current_student.id).all
@@ -39,6 +41,7 @@ class StudentsController < ApplicationController
     @today_assignments = StudentAssignment.joins(:assignment).where("DATE(assignments.due_date) = ?", Date.today).all
     @tomorrow_assignments = StudentAssignment.joins(:assignment).where("DATE(assignments.due_date) = ?", Date.tomorrow).all
     @week_assignments = StudentAssignment.joins(:assignment).where("DATE(assignments.due_date) BETWEEN ? AND ?", Date.today.beginning_of_week, Date.today.end_of_week).all
+    @next_2_weeks_assignments = StudentAssignment.joins(:assignment).where("DATE(assignments.due_date) BETWEEN ? AND ?", Date.today.beginning_of_week, Date.today.end_of_week + 7.days).all
     @all_assignments = StudentAssignment.where(student_id: current_student.id).all
   end
 
