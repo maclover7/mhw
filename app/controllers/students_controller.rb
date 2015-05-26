@@ -7,6 +7,8 @@ class StudentsController < ApplicationController
 
     ## Per Time Period:
     if params[:time] == "overdue"
+      @page_heading = "Overdue Assignments:"
+      @student_assignments = StudentAssignment.joins(:assignment).where("assignments.due_date <= ?", Date.today).all #where("DATE(assignments.due_date) <= ?", Date.today).all
     elsif params[:time] == "today"
       @page_heading = "Today's Assignments:"
       @student_assignments = StudentAssignment.joins(:assignment).where("DATE(assignments.due_date) = ?", Date.today).all
@@ -29,7 +31,7 @@ class StudentsController < ApplicationController
     end
 
     ## Count Info:
-    @today = Date.today.strftime("%A, %B %d")
+    @overdue_assignments = StudentAssignment.joins(:assignment).where("assignments.due_date <= ?", Date.today).all
     @today_assignments = StudentAssignment.joins(:assignment).where("DATE(assignments.due_date) = ?", Date.today).all
 
     @all_assignments = StudentAssignment.where(student_id: current_student.id).all
