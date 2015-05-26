@@ -16,7 +16,15 @@
         <% else %>
           0
         <% end %></span> Today</a></p>
-      <p><a href="#"><span class="badge">3</span> Tomorrow</a></p>
+
+      <p><a href="?time=tomorrow"><span class="badge">
+        <% if @tomorrow_assignments %>
+          <%= @tomorrow_assignments.count %>
+        <% else %>
+          0
+        <% end %></span> Tomorrow</a></p>
+
+
       <p><a href="#"><span class="badge">3</span> This week</a></p>
       <p><a href="#"><span class="badge">3</span> Next 2 Weeks</a></p>
       <p><a href="?time=all"><span class="badge">
