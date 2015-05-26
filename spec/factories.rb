@@ -34,6 +34,7 @@ FactoryGirl.define do
   factory :student_assignment do
     assignment_id { Faker::Number.digit }
     student_id { Faker::Number.digit }
+    completed "false"
   end
 
   factory :student, traits: [:user]
