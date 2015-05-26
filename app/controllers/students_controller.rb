@@ -18,8 +18,8 @@ class StudentsController < ApplicationController
     elsif params[:time] == "week"
     elsif params[:time] == "next_2_weeks"
     elsif params[:time] == "all"
-      @student_assignments = StudentAssignment.where(student_id: current_student.id).all
       @page_heading = "All Assignments:"
+      @student_assignments = StudentAssignment.where(student_id: current_student.id).all
     end
 
     ## Per Course:
@@ -36,7 +36,6 @@ class StudentsController < ApplicationController
     @overdue_assignments = StudentAssignment.joins(:assignment).where("assignments.due_date <= ?", Date.today).all
     @today_assignments = StudentAssignment.joins(:assignment).where("DATE(assignments.due_date) = ?", Date.today).all
     @tomorrow_assignments = StudentAssignment.joins(:assignment).where("DATE(assignments.due_date) = ?", Date.tomorrow).all
-
     @all_assignments = StudentAssignment.where(student_id: current_student.id).all
   end
 
