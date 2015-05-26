@@ -33,7 +33,7 @@ RSpec.describe StudentsController, type: :controller do
         course = FactoryGirl.create(:course)
         enrollment = FactoryGirl.create(:enrollment, course_id: course.id, student_id: student.id)
         assignment = FactoryGirl.create(:assignment, course_id: course.id, due_date: "#{1.day.ago}")
-        student_assignment = FactoryGirl.create(:student_assignment, assignment_id: assignment.id, student_id: student.id, completed: false)
+        student_assignment = FactoryGirl.create(:student_assignment, assignment_id: assignment.id, student_id: student.id, completed: nil)
         student_assignment_1 = FactoryGirl.create(:student_assignment, assignment_id: assignment.id, student_id: student.id, completed: true)
 
         get :index, time: "overdue"
@@ -150,7 +150,7 @@ RSpec.describe StudentsController, type: :controller do
         course = FactoryGirl.create(:course)
         enrollment = FactoryGirl.create(:enrollment, course_id: course.id, student_id: student.id)
         assignment = FactoryGirl.create(:assignment, course_id: course.id, due_date: "#{Date.today}")
-        student_assignment = FactoryGirl.create(:student_assignment, assignment_id: assignment.id, student_id: student.id)
+        student_assignment = FactoryGirl.create(:student_assignment, assignment_id: assignment.id, student_id: student.id, completed: nil)
 
         get :index, time: "all"
         assigns(:student_assignments).should eq([student_assignment])
