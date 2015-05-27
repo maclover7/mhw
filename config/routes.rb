@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   root to: "pages#home"
   get 'auth' => "pages#auth"
+  get "help" => "pages#help"
 
   resources :courses
   resources :assignments

@@ -10,6 +10,14 @@ RSpec.describe PagesController, type: :controller do
     end
   end
 
+  describe "GET #help" do
+    it "renders the help template" do
+      get :help
+      response.should render_template 'help'
+      response.status.should eq(200)
+    end
+  end
+
   describe "GET #home" do
     it "renders the home template" do
       get :home
