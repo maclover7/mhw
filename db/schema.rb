@@ -11,17 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150525223719) do
+ActiveRecord::Schema.define(version: 20150529140815) do
 
   create_table "assignments", force: :cascade do |t|
     t.string   "name"
     t.text     "body"
     t.integer  "course_id"
     t.integer  "teacher_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.datetime "due_date"
     t.string   "category"
+    t.string   "quiz_center_category"
+    t.text     "essay_prompt"
+    t.boolean  "active"
   end
 
   create_table "course_files", force: :cascade do |t|

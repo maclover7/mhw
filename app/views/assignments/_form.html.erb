@@ -33,6 +33,23 @@
       <option value="Online Assessment">Online Assessment</option>
     </select>
   </div>
+
+  <% if @assignment.category == "Online Assessment" %>
+    <div class="form-group">
+      <label for="assignment_quiz_center_category">Quiz Center Category</label><br>
+      <select name="assignment[quiz_center_category]" id="quiz_center_category">
+        <option selected="selected" value="Essay">Essay</option>
+      </select>
+    </div>
+  <% end %>
+
+  <% if @assignment.quiz_center_category == "Essay" %>
+    <div class="form-group">
+      <%= f.label :essay_prompt %>
+      <%= f.text_area :essay_prompt, class: "form-control" %>
+    </div>
+  <% end %>
+
   <div class="form-group">
     <%= f.label :course_id %><br>
     <%= f.collection_select :course_id, Course.where(teacher_id: current_teacher).all, :id, :name %>

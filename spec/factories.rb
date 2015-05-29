@@ -7,6 +7,9 @@ FactoryGirl.define do
     course_id { Faker::Number.digit }
     teacher_id { Faker::Number.digit }
     category "Quiz"
+    quiz_center_category "Essay"
+    essay_prompt "Stuff!!"
+    active true
   end
 
   factory :course do
