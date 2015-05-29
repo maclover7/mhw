@@ -156,6 +156,16 @@ RSpec.describe StudentsController, type: :controller do
         assigns(:student_assignments).should eq([student_assignment])
       end
     end
+  end
 
+  describe "GET #quiz_center" do
+    let(:student) { FactoryGirl.create(:student) }
+    before { sign_in student }
+    
+    it "renders the quiz_center template" do
+      get :quiz_center
+      response.should render_template 'quiz_center'
+      response.status.should eq(200)
+    end
   end
 end

@@ -15,4 +15,15 @@ RSpec.describe TeachersController, type: :controller do
     end
   end
 
+  describe "GET #quiz_center" do
+    let(:teacher) { FactoryGirl.create(:teacher) }
+    before { sign_in teacher }
+
+    it "renders the quiz_center template" do
+      get :quiz_center
+      response.should render_template 'quiz_center'
+      response.status.should eq(200)
+    end
+  end
+
 end
