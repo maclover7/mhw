@@ -3,6 +3,7 @@ class AddonsController < ApplicationController
   before_action :authenticate_teacher!
   before_action :teacher_course
 
+  # POST /courses/1/add_link
   def add_link
     name = params[:course_link][:name]
     url = params[:course_link][:url]
@@ -15,6 +16,7 @@ class AddonsController < ApplicationController
     end
   end
 
+  # DELETE /courses/1/delete_link/1
   def delete_link
     @course_link = CourseLink.find(params[:link_id])
 
@@ -23,6 +25,7 @@ class AddonsController < ApplicationController
     redirect_to course_path(@course)
   end
 
+  # POST /courses/1/add_file
   def add_file
     name = params[:course_file][:name]
     file = params[:course_file][:file]
@@ -36,6 +39,7 @@ class AddonsController < ApplicationController
     end
   end
 
+  # DELETE /courses/1/delete_file/1
   def delete_file
     @course_file = CourseFile.find(params[:file_id])
 

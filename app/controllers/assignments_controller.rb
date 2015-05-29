@@ -4,13 +4,11 @@ class AssignmentsController < ApplicationController
   before_action :correct_teacher, only: [:edit, :update, :destroy]
 
   # GET /assignments
-  # GET /assignments.json
   def index
     @assignments = Assignment.where(teacher_id: current_teacher).all
   end
 
   # GET /assignments/1
-  # GET /assignments/1.json
   def show
   end
 
@@ -24,7 +22,6 @@ class AssignmentsController < ApplicationController
   end
 
   # POST /assignments
-  # POST /assignments.json
   def create
     @assignment = current_teacher.assignments.build(assignment_params) #Assignment.new(assignment_params)
 
@@ -39,7 +36,6 @@ class AssignmentsController < ApplicationController
   end
 
   # PATCH/PUT /assignments/1
-  # PATCH/PUT /assignments/1.json
   def update
     respond_to do |format|
       if @assignment.update(assignment_params)
@@ -51,7 +47,6 @@ class AssignmentsController < ApplicationController
   end
 
   # DELETE /assignments/1
-  # DELETE /assignments/1.json
   def destroy
     @assignment.destroy_student_assignments!
     @assignment.destroy

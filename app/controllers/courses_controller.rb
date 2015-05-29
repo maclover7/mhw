@@ -6,13 +6,11 @@ class CoursesController < ApplicationController
   before_action :course_student, only: [:show]
 
   # GET /courses
-  # GET /courses.json
   def index
     @courses = Course.all
   end
 
   # GET /courses/1
-  # GET /courses/1.json
   def show
     @assignments = @course.assignments
     @course_links = @course.course_links
@@ -29,7 +27,6 @@ class CoursesController < ApplicationController
   end
 
   # POST /courses
-  # POST /courses.json
   def create
     @course = current_teacher.courses.build(course_params)
 
@@ -43,7 +40,6 @@ class CoursesController < ApplicationController
   end
 
   # PATCH/PUT /courses/1
-  # PATCH/PUT /courses/1.json
   def update
     respond_to do |format|
       if @course.update(course_params)
@@ -55,7 +51,6 @@ class CoursesController < ApplicationController
   end
 
   # DELETE /courses/1
-  # DELETE /courses/1.json
   def destroy
     @course.destroy
     respond_to do |format|

@@ -1,6 +1,7 @@
 class StudentsController < ApplicationController
   before_filter :authenticate_student!
 
+  # GET /
   def index
     @student = current_student
     @courses = current_student.courses
