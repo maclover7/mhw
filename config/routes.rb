@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   post "/courses/:id/add_file" => "addons#add_file", as: :add_file_course
   delete "/courses/:id/delete_file/:file_id" => "addons#delete_file", as: :delete_file_course
 
+  get "/quiz_center/:id/take" => "quiz_center#take"
+
   devise_for :users, skip: :registrations
   devise_for :students, :teachers, controllers: { registrations: "registrations" }, skip: :sessions
   # The priority is based upon order of creation: first created -> highest priority.
