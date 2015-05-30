@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   %w(Student Teacher).each do |t|
     authenticated :user, lambda { |u| u.type == t } do
       root to: "#{ t.pluralize.underscore }#index", as: "#{ t.downcase }_root".to_sym
+      get "quiz_center" => "#{ t.pluralize.underscore }#quiz_center"
     end
   end
 
@@ -24,6 +25,8 @@ Rails.application.routes.draw do
 
   post "/courses/:id/add_file" => "addons#add_file", as: :add_file_course
   delete "/courses/:id/delete_file/:file_id" => "addons#delete_file", as: :delete_file_course
+
+  get "/quiz_center/:id/take" => "quiz_center#take"
 
   devise_for :users, skip: :registrations
   devise_for :students, :teachers, controllers: { registrations: "registrations" }, skip: :sessions

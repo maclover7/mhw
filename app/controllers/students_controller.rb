@@ -46,4 +46,8 @@ class StudentsController < ApplicationController
     @all_assignments = StudentAssignment.where(student_id: current_student.id, completed: false).all && StudentAssignment.where(student_id: current_student.id, completed: nil).all
   end
 
+  # GET /quiz_center
+  def quiz_center
+  end
+
 end
