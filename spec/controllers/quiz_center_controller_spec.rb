@@ -10,6 +10,7 @@ RSpec.describe QuizCenterController, type: :controller do
         @course = FactoryGirl.create(:course)
         @enrollment = FactoryGirl.create(:enrollment, course_id: @course.id, student_id: student.id)
         @active_assignment = FactoryGirl.create(:assignment, active: true, course_id: @course.id)
+        @student_assignment = FactoryGirl.create(:student_assignment, assignment_id: @active_assignment.id, student_id: student.id)
       end
 
       it "renders the take template" do

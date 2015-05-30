@@ -4,6 +4,7 @@ class QuizCenterController < ApplicationController
   before_action :assignment_active
 
   def take
+    @student_assignment = StudentAssignment.where(assignment_id: @assignment.id, student_id: current_student.id)
   end
 
   private
